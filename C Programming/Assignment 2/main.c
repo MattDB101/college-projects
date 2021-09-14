@@ -62,7 +62,7 @@ int fscanfMB(FILE *file, const char *fString, char *fName, char *init, char *lNa
 				}
 
 				else if (strCount == 1) { // read string is the student's initial.
-                    init[0] = tempString[1]; // unload the character that is actually of use.
+                    			init[0] = tempString[1]; // unload the character that is actually of use.
 					init[i] = '\0';
 				}
 
@@ -87,10 +87,10 @@ int fscanfMB(FILE *file, const char *fString, char *fName, char *init, char *lNa
 			else if (fString[fStrIndex] == 'd') { // if formatString is of type decimal int.
 
 				if (intCount == 0) { // read string is the student's year.
-                    ret = strtol(&line[strIndex], &ptr, 10); // get long int from current string
+                   			 ret = strtol(&line[strIndex], &ptr, 10); // get long int from current string
 					*year = ret;
 					if (ret !=0) { // student's year cannot be 0.
-                        matchedParams++;
+                       				matchedParams++;
 					}
 				}
 
