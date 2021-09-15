@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title>Help</title>
+        
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li> 
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/help">Help</a></li>
+                <% if (locals.auth) { %> <li><a href="/admin">Admin Panel</a></li> <% } %>
+                <% if (!locals.loggedIn) { %> <li><a href="/login">Login</a></li><% } %>
+                <% if (locals.loggedIn) { %> <li><a href="/logout" onclick=" return confirm('Are you sure you want to logout?');">Logout</a></li> <% } %>
+            </ul>
+        </nav>
+        <div class="main">
+            <h1>Frequently Asked Questions.</h1>
+            <h5 style="margin-top: -6em;">
+                <ol>
+                    <li>How do I register for an account?</li>
+                    <p>You can register for an account by getting in touch with an admin via the "Contact" page.</p>
+
+                    <li>What sort of accounts are there?</li>
+                    <p>There are two account types available; a "Guest" account, which is free & a "Verified" account, which is €5 per month.</p>
+                    
+                    <li>I've forgotten my login details, how can I regain access to my account?</li>
+                    <p>You can request to change your account details by getting in touch with an admin via the "Contact" page, you'll have to verify that the account is yours.</p>
+                    
+                    <li>What are the benefits of a "Verified" account?</li>
+                    <p>With a Verified account you'll gain acces to exclusive content via our subscribers only mailing list.</p>
+                </ol>
+            </h5><br><br><br><br><br><br>
+        </div>
+        <footer>
+            <hr id="footerHR">
+            <p id="footerText">Matthew Byrne, SD2-A, R00173315.<br>Contact: <a href="mailto:name@email.com">matthew.byrne@mycit.ie</a></p>
+        </footer>
+    </body>
+</html>

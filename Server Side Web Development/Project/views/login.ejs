@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title>Home</title>
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li> 
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/help">Help</a></li>
+
+            </ul>
+        </nav>
+        <div class="main">
+            <div class="form">
+                <h3 class="centertext">Login</h3>
+                <% if (locals.loginMessage) { %> <h3 class="failmessage"><%= loginMessage %></h3><% } %>
+                <p><form action="/login" method="POST">
+                    <div class ="input">
+                        <input type="text" id="username" name="username" required placeholder="Username"><br>
+                    </div>
+                    <div class ="input">
+                        <input type="password" id="password" name="password" required placeholder="Password">
+                    </div>
+                    <div class ="input">
+                        <button class="button" type="cancel" onclick="javascript:window.location='http://localhost:3000/';">Cancel</button>
+                        <button class="button" type="submit" value="Submit">Login</button>
+                    </div>
+                </form></p>
+            </div>
+        </div>
+        <footer>
+            <hr id="footerHR">
+            <p id="footerText">Matthew Byrne, SD2-A, R00173315.<br>Contact: <a href="mailto:name@email.com">matthew.byrne@mycit.ie</a></p>
+        </footer>
+    </body>
+</html>
+

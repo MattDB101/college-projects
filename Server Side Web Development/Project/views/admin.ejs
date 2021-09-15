@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title>Admin Panel</title>
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li> 
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/help">Help</a></li>
+                <li><a href="/logout" onclick=" return confirm('Are you sure you want to logout?');">Logout</a></li>
+            </ul>
+        </nav>
+        <div class="main">
+
+            <div class="form">
+                <h3 class="centertext">Register User</h3>
+                <% if (locals.registerMessage) { %> <h3 class="failmessage"><%= registerMessage %></h3><% } %>
+                <form action="/admin/registeruser" method="POST">
+                    <div class ="input">
+                        <input type="text" id="registerUsername" name="registerUsername" required placeholder="Username"><br>
+                    </div>
+                    <div class ="input">
+                        <input type="password" id="registerPassword" name="registerPassword" required placeholder="Password"><br>
+                    </div>
+                    <div class ="input">
+                        <input type="password" id="registerConfirmPassword" name="registerConfirmPassword" required placeholder="Confirm Password"><br>
+                    </div>
+                    <div class ="input">
+                        <label for="role">User Type:</label><br>
+                        <select name="role" class="role">
+                            <option value="Admin">Admin</option>
+                            <option value="Ordinary">Ordinary</option>
+                            <option value="Guest">Guest</option>
+                        </select>
+                    </div>
+                    <div class ="input">
+                        <button type="submit" class="button">Register User.</button>
+                    </div>
+                </form>
+                <hr>
+
+                <div class="form">
+                    <h3 class="centertext">View User</h3>
+                    
+                    <% if (locals.viewMessage) { %> <h3 class="failmessage"><%= viewMessage %></h3><% } %>
+                    <%if (tableData != null) { %>
+                    <table cellpadding="1" cellspacing="0" border="3">
+                        <tr>
+                            <th>Username</th>
+                            <th>Role</th>
+                        </tr>
+                        <%
+                        if(tableData.length!=0){
+                        var i=1;
+                        tableData.forEach(function(data){
+                        %>
+                        <tr>
+                            <td><%=data.username %></td>
+                            <td><%=data.role %></td>
+                        </tr>
+                        <%  i++; }) %>
+                        <% } else{ %>
+                            <tr>
+                                <td colspan="7">No Data Found</td>
+                            </tr>
+                        <% } %>
+                        <% } %>
+                    </table>
+                    <form action="/admin/view" method="POST">
+                        <div class ="input">
+                            <select name="viewUser" class="viewUser">
+                                <option value="">All Users</option>
+                                <% if(userData!=null){ %>
+                                    <% if(userData.length>0){
+                                        userData.forEach(function(data){ %>
+                                            <option value=<%=data.username %>><%=data.username %></option>
+                                        <% }) %>
+                                    <% } %>
+                                <% } %>
+                            </select>
+                                        
+                        </div>
+                        <div class ="input">
+                            <button type="submit" id="toggleVisibilityButton" class="button">View Details.</button>
+                        </div>
+                    </form>
+                </div>  
+                  
+                <hr>
+
+                <div class="form">
+                    <h3 class="centertext">Modify User</h3>
+                    <% if (locals.modifyMessage) { %> <h3 class="failmessage"><%= modifyMessage %></h3><% } %>
+                    <form action="/admin/modify" method="POST">
+
+                        <div class ="input">
+                            <label for="modifyUser">User to be modified:</label><br>
+                            <select name="modifyUser" class="removeUser">
+                            <option value=""></option>
+                            <% if(userData!=null){ %>
+                                <% if(userData.length>0){
+                                    userData.forEach(function(data){ %>
+                                        <option value=<%=data.username %>><%=data.username %></option>
+                                    <% }) %>
+                                <% } %>
+                            <% } %>
+                        </select>
+                        </div>
+                        <div class ="input">
+                            <label for="changePassword">Change Password: <br><small>(Not Required)</small></label><br>
+                            <input type="text" id="changePassword" name="changePassword" placeholder="Password"><br>
+                        </div>
+                        <div class ="input">
+                            <label for="role">Change Role:<br><small>(Not Required)</small></label><br>
+                            <select name="role" class="role">
+                                <option value=""></option>
+                                <option value="Admin">Admin</option>
+                                <option value="Ordinary">Ordinary</option>
+                                <option value="Guest">Guest</option>
+                            </select>
+                        </div>
+
+                        <div class ="input">
+                            <button type="submit" class="button">Modify User.</button>
+                        </div>
+                    </form>
+
+                <hr>
+
+                <<div class="form">
+                <h3 class="centertext">Remove User</h3>
+                <% if (locals.removeMessage) { %> <h3 class="failmessage"><%= removeMessage %></h3><% } %>
+                <form action="/admin/removeuser" method="POST">
+
+                    <div class ="input">
+                        <label for="removeUser">User to be removed:</label><br>
+                        <select name="removeUser" class="removeUser">
+                            <option value=""></option>
+                            <% if(userData!=null){ %>
+                                <% if(userData.length>0){
+                                    userData.forEach(function(data){ %>
+                                        <option value=<%=data.username %>><%=data.username %></option>
+                                    <% }) %>
+                                <% } %>
+                            <% } %>
+                        </select>
+                                    
+                    </div>
+                    <div class ="input">
+                        <button type="submit" class="button">Remove User.</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br><br><br><br><br><br>
+        <script>
+        document.getElementById("toggleVisibilityButton").addEventListener("click", function(button) {    
+            if (document.getElementById("displaytable").style.display === "none") 		     
+                document.getElementById("displaytable").style.display = "block"
+            
+            else document.getElementById("displaytable").style.display = "none"
+         });
+        </script> 
+        <footer>
+            <hr id="footerHR">
+            <p id="footerText">Matthew Byrne, SD2-A, R00173315.<br>Contact: <a href="mailto:name@email.com">matthew.byrne@mycit.ie</a></p>
+        </footer>
+    </body>
+</html>
