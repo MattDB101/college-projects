@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+service spellingGame {
+    rpc StartGame(startRequest) returns (startResponse) {}
+    rpc CheckWord(CheckRequest) returns (CheckResponse) {}
+}
+
+
+message startRequest {
+    string matchtype = 1;
+}
+
+message startResponse {
+    string letters = 1;
+}
+
+message CheckRequest {
+    string word = 1;
+    int32 score = 2;
+}
+
+message CheckResponse {
+    string msg = 1;
+    int32 score = 2;
+    int32 totScore = 3;
+}
